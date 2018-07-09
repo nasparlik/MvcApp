@@ -1,0 +1,47 @@
+﻿@model MvcApp.Models.TableIndexModel
+@{
+    ViewData["Title"] = "DataTable";
+}
+
+<div class="container">
+    <h2>Table displayed using first approach</h2>
+
+    @if (!Model.DataTable.Any())
+    {   
+        <p>We don't have any data yet.</p>
+    }
+    else
+    {
+        <table id="photos" class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Photo title</th>
+                    <th>Album name</th>
+                    <th>Thumbnail</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var photo in Model.DataTable)
+                {
+                <tr>
+                    <td>@photo.PhotoTitle</td>
+                    <td>@photo.AlbumName</td>
+                    <td>
+                        <a href="@photo.Url">
+                            <img src="@photo.Thumbnail" style="height:50px;width:50px;">
+                        </a>
+                    </td>
+                </tr>  
+                }
+            </tbody>
+        </table>
+    }
+    </div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $("#photos").DataTable();
+        });
+    </script>
+}
